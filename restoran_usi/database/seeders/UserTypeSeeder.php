@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\UserType;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class UserTypeSeeder extends Seeder
 {
@@ -12,8 +13,15 @@ class UserTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        UserType::factory()
-            ->count(5)
-            ->create();
+        DB::table('user_types')->insert([
+            [
+                'user_type_id' => 1,
+                'type_name' => 'Admin',
+            ],
+            [
+                'user_type_id' => 2,
+                'type_name' => 'Konobar',
+            ],
+        ]);
     }
 }

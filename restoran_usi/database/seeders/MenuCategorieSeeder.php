@@ -12,8 +12,19 @@ class MenuCategorieSeeder extends Seeder
      */
     public function run(): void
     {
-        MenuCategorie::factory()
-            ->count(5)
-            ->create();
+        $categories = [
+            'Appetizers',
+            'Grilled Dishes',
+            'Fish & Seafood',
+            'Beverages',
+            'Desserts',
+            'Salads',
+            'Soups',
+            'Pasta & Rice'
+        ];
+
+        foreach ($categories as $category) {
+            MenuCategorie::create(['name' => $category]);
+        }
     }
 }

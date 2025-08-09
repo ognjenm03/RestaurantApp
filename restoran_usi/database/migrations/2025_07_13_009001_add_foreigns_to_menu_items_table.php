@@ -10,21 +10,21 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('menu_items', function (Blueprint $table) {
-            $table
-                ->foreign('order_item_id')
-                ->references('order_item_id')
-                ->on('order_items')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
+        // Schema::table('menu_items', function (Blueprint $table) {
+        //     $table
+        //         ->foreign('order_item_id')
+        //         ->references('order_item_id')
+        //         ->on('order_items')
+        //         ->onUpdate('CASCADE')
+        //         ->onDelete('CASCADE');
 
-            $table
-                ->foreign('menu_categorie_id')
-                ->references('category_id')
-                ->on('menu_categories')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
-        });
+        //     $table
+        //         ->foreign('menu_categorie_id')
+        //         ->references('category_id')
+        //         ->on('menu_categories')
+        //         ->onUpdate('CASCADE')
+        //         ->onDelete('CASCADE');
+        // });
     }
 
     /**

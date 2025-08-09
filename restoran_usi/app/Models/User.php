@@ -5,35 +5,32 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Scopes\Searchable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-    use HasFactory;
-    use Searchable;
-    use HasApiTokens;
+    use Notifiable, HasFactory, Searchable, HasApiTokens;
+
+    protected $primaryKey = 'user_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'username',
-        'password_hash',
+        'password',
         'full_name',
         'user_type_id',
+        'email'
     ];
+
+    protected $hidden = ['password', 'remember_token'];
 
     protected $searchableFields = ['*'];
 
-    protected $hidden = ['full_name'];
-
     public function type()
     {
-        return $this->belongsTo(
-            UserType::class,
-            'user_type_id',
-            'user_type_id'
-        );
+        return $this->belongsTo(UserType::class, 'user_type_id', 'user_type_id');
     }
 
     public function orders()
@@ -44,5 +41,15 @@ class User extends Authenticatable
     public function isSuperAdmin(): bool
     {
         return in_array($this->email, config('auth.super_admins'));
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'user_id';
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->{$this->getAuthIdentifierName()};
     }
 }

@@ -26,7 +26,7 @@ class OrderFactory extends Factory
             'created_at' => $this->faker->dateTime(),
             'is_paid' => $this->faker->boolean(),
             'total_price' => $this->faker->randomNumber(1),
-            'payment_method' => '',
+            'payment_method' => $this->faker->randomElement(['cash', 'card']),
             'user_id' => \App\Models\User::factory(),
             'table_id' => \App\Models\Table::factory(),
         ];
