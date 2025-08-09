@@ -12,6 +12,7 @@ class OrderItem extends Model
     use Searchable;
 
     protected $fillable = ['quantity', 'price', 'order_id'];
+    protected $primaryKey = 'order_item_id';
 
     protected $searchableFields = ['*'];
 

@@ -5,8 +5,9 @@
 
     <div class="grid grid-cols-4 gap-6">
         @foreach($tables as $table)
-            <div class="p-6 rounded-lg shadow-md border-2
-                {{ $table->status == 1 ? 'bg-green-100 border-green-500' : 'bg-red-100 border-red-500' }}">
+            <a href="{{ route('tables.show', $table) }}" class="block p-6 rounded-lg shadow-md border-2
+                {{ $table->status == 1 ? 'bg-green-100 border-green-500' : 'bg-red-100 border-red-500' }} hover:shadow-lg transition-shadow"
+                >
                 <h2 class="text-lg font-bold mb-2">Table {{ $table->table_number }}</h2>
                 @if($table->status == 1)
                     <p class="text-green-700 font-semibold">Free</p>
@@ -15,7 +16,7 @@
                 @else
                     <p class="text-gray-500">Status unknown</p>
                 @endif
-            </div>
+            </a>
         @endforeach
     </div>
 @endsection

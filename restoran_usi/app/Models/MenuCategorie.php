@@ -11,6 +11,7 @@ class MenuCategorie extends Model
     use HasFactory;
     use Searchable;
 
+     protected $primaryKey = 'category_id';
     protected $fillable = ['name'];
 
     protected $searchableFields = ['*'];

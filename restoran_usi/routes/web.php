@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
 // Preusmeri / na /tables, ali samo ako je korisnik ulogovan (auth middleware)
 Route::redirect('/', '/tables')->middleware('auth');
@@ -28,6 +29,10 @@ Route::middleware('auth')->group(function () {
 
     // Tables, Statistics i Bills rute za dashboard sekcije
     Route::get('/tables', [TableController::class, 'index'])->name('tables.index');
+     Route::get('/tables/{table}', [TableController::class, 'show'])->name('tables.show');
+
+    // kreiranje porudžbine
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::view('/statistics', 'statistics.index')->name('statistics.index');
     Route::view('/bills', 'bills.index')->name('bills.index');
 

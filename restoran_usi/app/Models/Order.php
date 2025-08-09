@@ -19,6 +19,7 @@ class Order extends Model
         'user_id',
         'table_id',
     ];
+    protected $primaryKey = 'order_id';
 
     protected $searchableFields = ['*'];
 

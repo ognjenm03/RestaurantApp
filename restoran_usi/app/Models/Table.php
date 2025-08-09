@@ -11,6 +11,9 @@ class Table extends Model
     use HasFactory, Searchable;
 
     protected $fillable = ['table_number', 'status'];
+    protected $primaryKey = 'table_id'; 
+    public $incrementing = true;        
+    protected $keyType = 'int';         
 
     protected $searchableFields = ['*'];
 

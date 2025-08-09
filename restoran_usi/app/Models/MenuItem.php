@@ -18,6 +18,7 @@ class MenuItem extends Model
         'menu_categorie_id',
         'image',
     ];
+    protected $primaryKey = 'item_id';
 
     protected $searchableFields = ['*'];
 
