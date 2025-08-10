@@ -12,6 +12,6 @@ class TableSeeder extends Seeder
      */
     public function run(): void
     {
-        Table::factory()->count(5)->create(['status' => 1]);
+        Table::factory()->count(20)->create(['status' => 1]);
     }
 }

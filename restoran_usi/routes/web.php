@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
 
     // kreiranje porudžbine
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::view('/statistics', 'statistics.index')->name('statistics.index');
     Route::view('/bills', 'bills.index')->name('bills.index');
 

@@ -17,10 +17,21 @@ class TableController extends Controller
 
      public function show(Table $table, Request $request)
     {
+        // $categories = MenuCategorie::orderBy('name')->get();
+
+        // $categoryId = $request->query('category');
+
+        // $query = MenuItem::select('item_id', 'name', 'price', 'menu_categorie_id', 'image');
+
+        // if ($categoryId) {
+        //     $query->where('menu_categorie_id', $categoryId);
+        // }
+
+        // $menuItems = $query->orderBy('name')->get();
+
+        // return view('tables.show', compact('table', 'categories', 'menuItems', 'categoryId'));
         $categories = MenuCategorie::orderBy('name')->get();
-
         $categoryId = $request->query('category');
-
         $query = MenuItem::select('item_id', 'name', 'price', 'menu_categorie_id', 'image');
 
         if ($categoryId) {
@@ -29,6 +40,12 @@ class TableController extends Controller
 
         $menuItems = $query->orderBy('name')->get();
 
-        return view('tables.show', compact('table', 'categories', 'menuItems', 'categoryId'));
+        // Dohvati aktivnu neplaćenu porudžbinu za ovaj sto (ako postoji)
+        $activeOrder = $table->orders()
+                            ->where('is_paid', false)
+                            ->with('orderItems.menuItem') // eager load stavki i povezanih menija
+                            ->first();
+
+        return view('tables.show', compact('table', 'categories', 'menuItems', 'categoryId', 'activeOrder'));
     }
 }

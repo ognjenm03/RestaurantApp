@@ -11,7 +11,8 @@ class OrderItem extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = ['quantity', 'price', 'order_id'];
+    // protected $fillable = ['quantity', 'price', 'order_id'];
+    protected $fillable = ['order_id', 'item_id', 'quantity', 'price'];
     protected $primaryKey = 'order_item_id';
 
     protected $searchableFields = ['*'];
@@ -23,12 +24,13 @@ class OrderItem extends Model
         return $this->belongsTo(Order::class, 'order_id', 'order_id');
     }
 
-    public function menuItems()
+    public function menuItem()
     {
-        return $this->hasMany(
-            MenuItem::class,
-            'order_item_id',
-            'order_item_id'
-        );
+        // return $this->hasMany(
+        //     MenuItem::class,
+        //     'order_item_id',
+        //     'order_item_id'
+        // );
+        return $this->belongsTo(MenuItem::class, 'item_id', 'item_id');
     }
 }
