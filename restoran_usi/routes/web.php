@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::view('/statistics', 'statistics.index')->name('statistics.index');
     Route::view('/bills', 'bills.index')->name('bills.index');
 
+    Route::patch('/orders/{order}/pay', [App\Http\Controllers\OrderController::class, 'pay'])->name('orders.pay');
+
+
     // Rute koje može samo Admin (registracija i korisnici)
     Route::middleware('role:Admin')->group(function () {
         // Registracija novih korisnika

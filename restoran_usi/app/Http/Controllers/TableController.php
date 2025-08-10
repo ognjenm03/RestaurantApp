@@ -42,9 +42,11 @@ class TableController extends Controller
 
         // Dohvati aktivnu neplaćenu porudžbinu za ovaj sto (ako postoji)
         $activeOrder = $table->orders()
-                            ->where('is_paid', false)
+                            ->where('is_paid', 1) // nije placen order
                             ->with('orderItems.menuItem') // eager load stavki i povezanih menija
                             ->first();
+        
+        // dd($activeOrder->orderItems->first()->menuItem);
 
         return view('tables.show', compact('table', 'categories', 'menuItems', 'categoryId', 'activeOrder'));
     }
