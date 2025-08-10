@@ -99,7 +99,7 @@ class OrderController extends Controller
                 'payment_method' => $data['payment_method'],
                 // 'status' => 'created', // ili sta vec imas
                 'total_price' => 0, // izracunacemo nakon dodavanja stavki
-                'is_paid' => 1, // not paid
+                'is_paid' => 0, // not paid
                 'user_id' => auth()->id(), // ili 'user_id' => auth()->id() zavisno od imena kolone
             ]);
 
@@ -142,16 +142,17 @@ class OrderController extends Controller
 
     public function pay(Order $order)
     {
-        // Proveri da li je narudžbina trenutno neplaćena (1)
-        if ($order->is_paid != 1) {
-            return response()->json(['message' => 'Order is already paid or invalid status'], 400);
+        Log::info('Pay method called for order', ['order_id' => $order->order_id, 'is_paid_before' => $order->is_paid]);
+
+        if ($order->is_paid == 1) {
+            return response()->json(['message' => 'Order is already paid'], 400);
         }
 
-        // Promeni status narudžbine na 2 (plaćeno)
-        $order->is_paid = 2;
+        // Označi kao plaćeno
+        $order->is_paid = 1; 
         $order->save();
 
-        // Oslobodi sto (status = 1)
+        // Oslobodi sto
         $table = $order->table;
         $table->status = 1; // slobodan sto
         $table->save();
