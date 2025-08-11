@@ -6,6 +6,8 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StatisticsController;
+
 
 // Preusmeri / na /tables, ali samo ako je korisnik ulogovan (auth middleware)
 Route::redirect('/', '/tables')->middleware('auth');
@@ -38,7 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::view('/bills', 'bills.index')->name('bills.index');
 
     Route::patch('/orders/{order}/pay', [App\Http\Controllers\OrderController::class, 'pay'])->name('orders.pay');
-
+    Route::resource('users', UsersController::class);
+    Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics.index');
 
     // Rute koje može samo Admin (registracija i korisnici)
     Route::middleware('role:Admin')->group(function () {

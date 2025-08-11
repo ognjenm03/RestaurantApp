@@ -52,4 +52,13 @@ class User extends Authenticatable
     {
         return $this->{$this->getAuthIdentifierName()};
     }
+
+    public function getUserTypeNameAttribute()
+    {
+        return match($this->user_type_id) {
+            1 => 'Admin',
+            2 => 'Konobar',
+            default => 'N/A',
+        };
+    }
 }
