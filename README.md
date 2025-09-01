@@ -6,7 +6,7 @@ This is a Laravel application that can be run locally using XAMPP.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/username/project-name.git
+   git clone https://github.com/ognjenm03/RestaurantApp.git
    cd project-name
    Start Apache and MySQL in the XAMPP Control Panel.
 
