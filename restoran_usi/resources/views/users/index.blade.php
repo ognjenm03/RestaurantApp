@@ -33,9 +33,7 @@
                     <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-900">{{ $user->full_name }}</td>
                     <td class="whitespace-nowrap px-6 py-4 text-sm text-gray-900">{{ $user->user_type_name }}</td>
                     <td class="whitespace-nowrap px-6 py-4 text-center text-sm font-medium space-x-1">
-                        <a href="{{ route('users.show', $user) }}" class="inline-block rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600 transition">
-                            👁 Prikaži
-                        </a>
+                        
                         <a href="{{ route('users.edit', $user) }}" class="inline-block rounded bg-yellow-400 px-3 py-1 text-white hover:bg-yellow-500 transition">
                             ✏ Uredi
                         </a>
