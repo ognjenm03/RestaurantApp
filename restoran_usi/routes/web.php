@@ -13,14 +13,12 @@ use App\Http\Controllers\BillsController;
 // Preusmeri / na /tables, ali samo ako je korisnik ulogovan (auth middleware)
 Route::redirect('/', '/tables')->middleware('auth');
 
-// Dashboard ruta, samo za ulogovane i verifikovane
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
-    // Dashboard (ovo može da se izbaci jer već imaš gore, ali nije problem)
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -30,11 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Tables, Statistics i Bills rute za dashboard sekcije
     Route::get('/tables', [TableController::class, 'index'])->name('tables.index');
      Route::get('/tables/{table}', [TableController::class, 'show'])->name('tables.show');
 
-    // kreiranje porudžbine
+    // kreiranje porudzbine
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::view('/statistics', 'statistics.index')->name('statistics.index');

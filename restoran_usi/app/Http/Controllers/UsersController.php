@@ -31,7 +31,6 @@ class UsersController extends Controller
 
     public function store(UserStoreRequest $request): RedirectResponse
     {
-        // Ručna validacija podataka iz forme
         $validated = $request->validate([
             'username' => 'required|string|max:255|unique:users,username',
             'full_name' => 'required|string|max:255',
@@ -39,16 +38,13 @@ class UsersController extends Controller
             'user_type_id' => 'required|in:1,2',
         ]);
 
-        // Hash lozinke pre snimanja
         $validated['password'] = bcrypt($validated['password']);
 
-        // Kreiranje korisnika u bazi
         User::create($validated);
 
         // Flash poruka o uspehu
         $request->session()->flash('success', 'Korisnik je uspešno dodat.');
 
-        // Redirekcija na listu korisnika
         return redirect()->route('users.index');
     }
 
@@ -75,7 +71,7 @@ class UsersController extends Controller
             'user_type_id' => 'required|in:1,2',
         ]);
 
-        // Ako je password unet, hashiraj ga, inače nemoj menjati
+        // Ako je password unet, hash
         if (!empty($validated['password'])) {
             $validated['password'] = bcrypt($validated['password']);
         } else {
